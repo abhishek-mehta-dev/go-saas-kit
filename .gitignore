@@ -1,6 +1,50 @@
-# Ignore Air tmp folder
+# =========================
+# Go / Gin specific
+# =========================
+
+# Air temp folder
 /tmp
 
-# Ignore build binaries
+# Production / dev build binaries
 /bin
 /tmp/main
+
+# Vendor directory (if using vendoring)
+vendor/
+
+# Go workspace files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go test binary
+*.test
+
+# Go coverage files
+*.out
+
+# =========================
+# Environment
+# =========================
+
+# Local env file
+.env
+
+# =========================
+# IDE / Editor
+# =========================
+
+# VSCode
+.vscode/
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# MacOS
+.DS_Store
+
+# Linux
+*~
