@@ -1,0 +1,6 @@
+# Ignore Air tmp folder
+/tmp
+
+# Ignore build binaries
+/bin
+/tmp/main
