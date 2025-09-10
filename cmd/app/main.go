@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/abhishek-mehta-dev/go-saas-kit.git/internal/db"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -20,6 +21,8 @@ func main() {
     if port == "" {
         port = "8080"
     }
+
+    db.ConnectDB()
 
     // Set Gin mode from env
     ginMode := os.Getenv("GIN_MODE")
