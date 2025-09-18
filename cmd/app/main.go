@@ -6,41 +6,42 @@ import (
 	"os"
 
 	"github.com/abhishek-mehta-dev/go-saas-kit.git/internal/db"
-	"github.com/abhishek-mehta-dev/go-saas-kit.git/internal/migrations"
+	"github.com/abhishek-mehta-dev/go-saas-kit.git/internal/server"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
 func main() {
-    // Load .env file
-    if err := godotenv.Load(); err != nil {
-        log.Println(".env file not found, using system environment")
-    }
+	// Load .env file
+	if err := godotenv.Load(); err != nil {
+		log.Println(".env file not found, using system environment")
+	}
 
-    // Get PORT from env, default to 8080
-    port := os.Getenv("PORT")
-    if port == "" {
-        port = "8080"
-    }
+	// Connect to database (must be done before server)
+	db.ConnectDB()
 
-    db.ConnectDB()
-    migrations.RunMigrations()
+	// Run migrations (optional, after DB connection)
+	//migrations.RunMigrations()
 
-    // Set Gin mode from env
-    ginMode := os.Getenv("GIN_MODE")
-    if ginMode == "" {
-        ginMode = gin.DebugMode
-    }
-    gin.SetMode(ginMode)
+	// Initialize server (this wires all modules)
+	srv, err := server.NewServer()
+	if err != nil {
+		log.Fatal("Failed to initialize server:", err)
+	}
 
-    router := gin.Default()
-    router.SetTrustedProxies([]string{"127.0.0.1"})
+	// Set Gin mode
+	ginMode := os.Getenv("GIN_MODE")
+	if ginMode == "" {
+		ginMode = gin.DebugMode
+	}
+	gin.SetMode(ginMode)
 
-    // Routes
-    router.GET("/ping", func(ctx *gin.Context) {
-        ctx.JSON(200, gin.H{"message": "Welcome to the world of GoLang!"})
-    })
+	// Get PORT from env, default to 8080
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 
-    fmt.Printf("[[Server is Successfully Running on Port: %s]]\n", port)
-    router.Run(":" + port)
+	fmt.Printf("[[Server is Successfully Running on Port: %s]]\n", port)
+	srv.Run(port)
 }
