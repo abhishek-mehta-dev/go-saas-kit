@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/abhishek-mehta-dev/go-saas-kit.git/internal/db"
+	"github.com/abhishek-mehta-dev/go-saas-kit.git/internal/migrations"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -23,6 +24,7 @@ func main() {
     }
 
     db.ConnectDB()
+    migrations.RunMigrations()
 
     // Set Gin mode from env
     ginMode := os.Getenv("GIN_MODE")
