@@ -14,13 +14,13 @@ type User struct {
 	UserName            string         `gorm:"uniqueIndex;size:50;not null"`
 	Email               string         `gorm:"uniqueIndex;size:100;not null"`
 	Password            string         `gorm:"not null"`
-	UserType            enums.UserRole `gorm:"type:int;not null;default:0"`
+	UserType            enums.UserRole `gorm:"type:varchar(20);not null;default:'member'"`
 	StripeCustomerId    string         `gorm:"size:100"`
 	StripePaymentMethodId string       `gorm:"size:100"`
 
 	CardLast4            string `gorm:"size:4"`
     CardBrand            string `gorm:"size:50"`
-
+		
 	
 	RefreshToken        string         `gorm:"size:255"`
 	CreatedAt           time.Time
