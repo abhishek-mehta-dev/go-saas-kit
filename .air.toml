@@ -3,17 +3,16 @@ root = "."
 tmp_dir = "tmp"
 
 [build]
-  # Command to build your app (output binary inside tmp folder)
+  # Compile your app to tmp/main
   cmd = "go build -o ./tmp/main ./cmd/app"
-  bin = "tmp/main"
-  full_bin = "./tmp/main"
+  bin = "./tmp/main"
 
-  # Watch these extensions for changes
+  # Watch only relevant file extensions
   include_ext = ["go", "tpl", "tmpl", "html"]
 
-  # Ignore vendor and tmp
-  exclude_dir = ["vendor", "tmp"]
+  # Ignore noise dirs
+  exclude_dir = ["vendor", "tmp", ".git"]
 
 [log]
-  time = true
   color = true
+  timestamp = true
