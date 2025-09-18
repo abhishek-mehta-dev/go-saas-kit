@@ -1,13 +1,14 @@
-Sure! Here’s a ready-to-use Markdown file you can save as `Atlas-Migrations.md` for your project:
 
-````markdown
 # Atlas Migration Commands - Go-SaaS-Kit
 
 > Make sure your `DATABASE_URL` environment variable is set before running these commands:
 
-```bash
+
+
+````
+
 export DATABASE_URL="postgresql://user:password@host:port/dbname?sslmode=require&search_path=public"
-```
+
 ````
 
 ---
@@ -26,6 +27,8 @@ export DATABASE_URL="postgresql://user:password@host:port/dbname?sslmode=require
 ## Recommended Workflow
 
 1. Update your GORM models.
+
+
 2. Generate a migration:
 
 ```bash
@@ -50,10 +53,4 @@ make atlas-lint
 make atlas-apply
 ```
 
-> This workflow ensures your database schema stays in sync with your models safely.
 
-```
-
----
-
-```
